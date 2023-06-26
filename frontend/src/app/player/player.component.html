@@ -1,0 +1,100 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<h1> Tennis Players </h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover is-hoverable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Country</th>
+                        <th>Ranking <a (click)="sortBy('Ranking')"> <i class="fa fa-sort"></i> </a></th>
+                        <th>Age <a (click)="sortBy('Age')"> <i class="fa fa-sort"></i> </a></th>
+                        <th>Height</th>
+                        <th>Hand</th>
+                        <th>Titles <a (click)="sortBy('Titles')"> <i class="fa fa-sort"></i> </a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let player of players">
+                        <td>{{ player.name }}</td>
+                        <td>{{ player.country }}</td>
+                        <td>{{ player.ranking }}</td>
+                        <td>{{ player.age }}</td>
+                        <td>{{ player.height }}</td>
+                        <td>{{ player.handedness }}</td>
+                        <td>{{ player.titles }}</td>
+                        <td><button class="btn-primary" (click)="openPopup('update', player.name)"><i class="fa fa-pencil"></i></button></td>
+                        <td><button class="btn-danger" (click)="removePlayer(player.name)"><i class="fa fa-remove"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn-primary" (click)="openPopup('add')"><i class="fa fa-plus"></i> Add player</button>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':popup}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-age">
+                <form [formGroup]="form" (ngSubmit)="sendData()">
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <br>
+                        <input formControlName="name" id="name" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <br>
+                        <input formControlName="country" id="country" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ranking">Ranking</label>
+                        <br>
+                        <input formControlName="ranking" id="ranking" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <br>
+                        <input formControlName="age" id="age" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="height">Height</label>
+                        <br>
+                        <input formControlName="height" id="height" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hand">Hand</label>
+                        <br>
+                        <input formControlName="hand" id="hand" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="titles">Titles</label>
+                        <br>
+                        <input formControlName="titles" id="titles" type="text" class="form-control">
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                        &nbsp;&nbsp;
+                        <button type="button" class="btn-danger" data-dismiss="modal"
+                            (click)="closePopup()">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
